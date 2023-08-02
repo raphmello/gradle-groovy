@@ -1,6 +1,9 @@
 build/
 out/
 
+# Ignore Gradle project-specific cache directory
+.gradle
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
