@@ -5,17 +5,39 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.2.1/userguide/building_java_projects.html in the Gradle documentation.
  */
 
+/* 'repositories', dependencies etc. são métodos dentro do objeto chamado Project que
+ * é criado pelo Gradle no background.
+ * Pode-se verificar que todos os métodos abaixo possuem argumentos, e esses argumentos são
+ * compostos por Closures (equivalente ao lambda do Java).
+ * Com exceção do 'plugins' que é somente um bloco de código, não é um método
+ */
+
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
 }
 
+project.description = "First Java Project with Gradle"
+project.version = 1.0
+
+//adding custom properties to project
+project.ext.customProperty = "Custom property"
+
 repositories {
+    println project.name
+    println project.description
+    println project.version
+    println project.path
+    println project.projectDir
+    println project.customProperty
+    println project.property("customProperty")
+    println "repositories"
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
 dependencies {
+    println "dependencies"
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13.2'
 
@@ -40,12 +62,14 @@ dependencies {
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
+    println "java"
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
     }
 }
 
 application {
+    println "application"
     // Define the main class for the application.
     mainClass = 'com.raphael.gradle.App'
 }
