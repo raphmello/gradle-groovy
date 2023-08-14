@@ -8,6 +8,15 @@
 plugins {
     id 'war'
     id 'org.gretty' version '4.0.3'
+    id 'jacoco'
+    id 'org.sonarqube' version '4.3.0.3225'
+}
+
+// gradle sonar
+sonar {
+    properties {
+        property "sonar.token", "sqa_4ace473a9a6e9e8db74b84e778f926411e5941bd"
+    }
 }
 
 repositories {
@@ -24,8 +33,12 @@ dependencies {
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
 gretty.httpPort = 8081
+
+test.finalizedBy jacocoTestReport
+jacocoTestReport.dependsOn test
+
